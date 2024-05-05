@@ -185,7 +185,7 @@ export const education = [
     school: "Taywade College, Koradi",
     date: "August 2020 - Jan 2024",
     grade: "8.71 CGPA",
-    desc: "I am currently pursuing a Bachelor's degree at Taywade College Koradi, Nagpur. I have completed All semesters and have a CGPA of 8.71. I have taken courses in Data Structures, Algorithms, Object-Oriented Programming, Database Management Systems, Operating Systems, and Computer Networks, among others. I am also a member of the Google Developers Student Club (GDSC) at KIIT, where I am learning and working on exciting projects with a team of talented developers.",
+    desc: "I am currently pursuing a Bachelor's degree at Taywade College Koradi, Nagpur. I have completed All semesters and have a CGPA of 8.71. I have taken courses in  Object-Oriented Programming, Database Management Systems, Operating Systems, and Web Development, among others.Where I am learning and working on exciting projects with a team of talented developers.",
     degree: "Bachelor of Science",
   },
   {
@@ -205,6 +205,15 @@ export const education = [
     grade: "60.3%",
     desc: "I completed my class 10 education at Methodist School, Dankuni, where I studied Science with Computer Application.",
     degree: "CBSE(X)",
+  },
+  {
+    id: 3,
+    img: "https://codeinsightacademy.com/blog/http://codeinsightacademy.com/blog/wp-content/uploads/2019/09/cropped-code-insight-academy.jpg",
+    school: "Code Insight",
+    date: "Feb 2023 - Jan 2024",
+    grade:"Pass",
+    desc: "I completed my diploma in Full stack Development  at Code insight Academy, Nagpur, where I studied Websites devlopment .",
+    degree: "Diploma in Full Stack Development",
   },
 ];
 
