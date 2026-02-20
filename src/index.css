@@ -1,0 +1,12 @@
+@import "tailwindcss";
+:root {
+  background-color: #0a0a0a; /* Match your Splash Screen bg */
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: 'Inter', sans-serif; /* Recommended for Dev portfolios */
+}
