@@ -13,10 +13,10 @@ const SkillsSection = () => {
       title: "Frontend",
       size: "lg:col-span-3", // Larger card for main stack
       skills: [
-        { name: "React.js", icon: <SiReact />, color: "text-[#61DAFB]" },
-        { name: "Next.js", icon: <SiNextdotjs />, color: "text-white" },
-        { name: "Tailwind", icon: <SiTailwindcss />, color: "text-[#06B6D4]" },
         { name: "JavaScript", icon: <SiJavascript />, color: "text-[#F7DF1E]" },
+        { name: "React.js", icon: <SiReact />, color: "text-[#61DAFB]" },
+        { name: "Tailwind", icon: <SiTailwindcss />, color: "text-[#06B6D4]" },
+        { name: "Next.js", icon: <SiNextdotjs />, color: "text-white" },
       ] 
     },
     {

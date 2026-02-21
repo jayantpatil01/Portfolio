@@ -1,75 +1,133 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ShoppingBag, Ticket, Layout, ChevronRight, ChevronLeft, Zap, ArrowUpRight } from 'lucide-react';
 import { 
-  SiReact, SiNodedotjs, SiMongodb, SiLaravel, 
-  SiPhp, SiTailwindcss, SiMysql, SiExpress 
+  X, ShoppingBag, Layout, ArrowUpRight, Code2, Users, HeartPulse, CreditCard 
+} from 'lucide-react';
+import { 
+  SiReact, SiNodedotjs, SiMongodb, SiTailwindcss, SiMysql, SiExpress, SiOpenai, SiRedux, SiPhp 
 } from 'react-icons/si';
+
+// --- YOUR IMAGE IMPORTS (Keep as is) ---
+import codeReviewImg1 from '../assets/Ai-code/Login.webp';
+import codeReviewImg2 from '../assets/Ai-code/Home.webp';
+import banquetImg1 from '../assets/BanquetPro/Login.webp'; 
+import banquetImg2 from '../assets/BanquetPro/Home.webp';  
+import banquetImg3 from '../assets/BanquetPro/Priority.webp';  
+import karigarImg1 from '../assets/Karigar/Loginpage.webp';
+import karigarImg2 from '../assets/Karigar/Home.webp';
+import karigarImg3 from '../assets/Karigar/AdminDashboard.webp';
+import karigarImg4 from '../assets/Karigar/AdminManageServiceprovider.webp';
+import karigarImg5 from '../assets/Karigar/ServiceCard.webp';
+import karigarImg6 from '../assets/Karigar/ServiceProviderDashboard.webp';
+import karigarImg7 from '../assets/Karigar/AdminServicesmanage.webp';
+import pawcareImg1 from '../assets/Pawcare/AdminDashboard.webp';
+import pawcareImg2 from '../assets/Pawcare/AdminLogin.webp';
+import pawcareImg3 from '../assets/Pawcare/AllAppointments.webp';
+import pawcareImg4 from '../assets/Pawcare/AllUsers.webp';
+import pawcareImg5 from '../assets/Pawcare/AppointmentSucess.webp';
+import pawcareImg6 from '../assets/Pawcare/BookAppointments.webp';
+import pawcareImg7 from '../assets/Pawcare/Homewithoutlogin.webp';
+import pawcareImg8 from '../assets/Pawcare/MyAppointments.webp';
+import pawcareImg9 from '../assets/Pawcare/Myprofile.webp';
+import pawcareImg10 from '../assets/Pawcare/Notifications.webp';
+import pawcareImg11 from '../assets/Pawcare/Reports.webp';
+import pawcareImg12 from '../assets/Pawcare/UserDashboard.webp';
+import pawcareImg13 from '../assets/Pawcare/Userlogin.webp';
+import pawcareImg14 from '../assets/Pawcare/UserRegister.webp';
+import tmafiaImg1 from '../assets/Tmafia/Home.webp';
+import tmafiaImg2 from '../assets/Tmafia/Addproducts.webp';
+import tmafiaImg3 from '../assets/Tmafia/AdminDashboard.webp';
+import tmafiaImg4 from '../assets/Tmafia/AllProducts.webp';
+import tmafiaImg5 from '../assets/Tmafia/Bestseller.webp';
+import tmafiaImg6 from '../assets/Tmafia/cart.webp';
+import tmafiaImg7 from '../assets/Tmafia/Orders.webp';
+import tmafiaImg8 from '../assets/Tmafia/SingleProduct.webp';
 
 const ProjectSection = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
 
-  // Lock scroll when modal is open
+  // Auto-scroll logic (5 seconds per slide)
   useEffect(() => {
+    let interval;
     if (selectedProject) {
       document.body.style.overflow = 'hidden';
+      interval = setInterval(() => {
+        setCurrentImgIndex((prev) => 
+          prev === selectedProject.images.length - 1 ? 0 : prev + 1
+        );
+      }, 5000);
     } else {
       document.body.style.overflow = 'unset';
     }
+    return () => clearInterval(interval);
   }, [selectedProject]);
 
   const projects = [
     {
       id: 1,
-      title: "Enterprise ERP System",
-      category: "Management",
-      description: "A comprehensive solution for inventory tracking, financial reporting, and employee management. Architected to handle complex relational data with high security and real-time updates.",
-      stack: "MERN Stack / Internal Operations",
-      images: [
-        "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&q=80&w=1000", 
-        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000"
-      ], 
+      title: "AI Code Reviewer",
+      category: "Generative AI",
+      description: "MERN stack app providing instant code logic reviews and bug detection using specialized AI prompts.",
+      images: [codeReviewImg1, codeReviewImg2],
       cardTech: [
         { icon: <SiReact className="text-[#61DAFB]" />, name: "React" },
-        { icon: <SiNodedotjs className="text-[#339933]" />, name: "Node" },
+        { icon: <SiOpenai className="text-white" />, name: "AI API" },
+        { icon: <SiNodedotjs className="text-[#339933]" />, name: "Node" }
+      ],
+      mainIcon: <Code2 size={24} className="text-blue-500" />
+    },
+    {
+      id: 2,
+      title: "BanquetPro ERP",
+      category: "Event Management",
+      description: "Complete ERP for managing staff, room allocation, and real-time booking for luxury banquet halls.",
+      images: [banquetImg1, banquetImg2, banquetImg3],
+      cardTech: [
+        { icon: <SiReact className="text-[#61DAFB]" />, name: "React" },
+        { icon: <SiTailwindcss className="text-[#06B6D4]" />, name: "Tailwind" },
         { icon: <SiMongodb className="text-[#47A248]" />, name: "MongoDB" }
       ],
       mainIcon: <Layout size={24} className="text-blue-500" />
     },
     {
-      id: 2,
-      title: "Modern E-Commerce",
-      category: "Retail Tech",
-      description: "A full-scale marketplace featuring dynamic product filtering, an optimized checkout flow, and a custom-built admin dashboard for inventory management.",
-      stack: "MERN Stack / Redux / Tailwind",
-      images: [
-        "https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&q=80&w=1000",
-        "https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&q=80&w=1000"
+      id: 3,
+      title: "Karigar Platform",
+      category: "B2B Marketplace",
+      description: "Service marketplace with Razorpay integration. Features robust PHP/MySQL architecture for Admin, Provider, and User roles.",
+      images: [karigarImg1, karigarImg2, karigarImg3, karigarImg4, karigarImg5, karigarImg6, karigarImg7],
+      cardTech: [
+        { icon: <SiPhp className="text-[#777BB4]" />, name: "PHP" },
+        { icon: <SiMysql className="text-[#4479A1]" />, name: "MySQL" },
+        { icon: <CreditCard className="text-blue-400" />, name: "Razorpay" }
       ],
+      mainIcon: <Users size={24} className="text-blue-500" />
+    },
+    {
+      id: 4,
+      title: "Pawcare Clinic",
+      category: "Healthcare",
+      description: "Appointment booking system for pet clinics with detailed medical reports and owner notifications.",
+      images: [pawcareImg1, pawcareImg2, pawcareImg3, pawcareImg4, pawcareImg5, pawcareImg6, pawcareImg7, pawcareImg8, pawcareImg9, pawcareImg10, pawcareImg11, pawcareImg12, pawcareImg13, pawcareImg14],
       cardTech: [
         { icon: <SiReact className="text-[#61DAFB]" />, name: "React" },
-        { icon: <SiExpress className="text-white" />, name: "Express" },
+        { icon: <SiNodedotjs className="text-[#339933]" />, name: "Node" },
+        { icon: <SiMongodb className="text-[#47A248]" />, name: "MongoDB" }
+      ],
+      mainIcon: <HeartPulse size={24} className="text-blue-500" />
+    },
+    {
+      id: 5,
+      title: "TMafia Store",
+      category: "E-Commerce",
+      description: "A premium clothing brand storefront featuring high-fidelity cart management and fashion catalogs.",
+      images: [tmafiaImg1, tmafiaImg2, tmafiaImg3, tmafiaImg4, tmafiaImg5, tmafiaImg6, tmafiaImg7, tmafiaImg8],
+      cardTech: [
+        { icon: <SiReact className="text-[#61DAFB]" />, name: "React" },
+        { icon: <SiRedux className="text-[#764ABC]" />, name: "Redux" },
         { icon: <SiTailwindcss className="text-[#06B6D4]" />, name: "Tailwind" }
       ],
       mainIcon: <ShoppingBag size={24} className="text-blue-500" />
-    },
-    {
-      id: 3,
-      title: "Lottery Gaming Engine",
-      category: "Gaming Logic",
-      description: "High-performance lottery ecosystem featuring secure transaction logic, automated prize distribution algorithms, and real-time result broadcasting.",
-      stack: "PHP 8.x / Laravel / MySQL",
-      images: [
-        "https://images.unsplash.com/photo-1518623489648-a173ef7824f3?auto=format&fit=crop&q=80&w=1000",
-        "https://images.unsplash.com/photo-1553481187-be93c21490a9?auto=format&fit=crop&q=80&w=1000"
-      ],
-      cardTech: [
-        { icon: <SiPhp className="text-[#777BB4]" />, name: "PHP" },
-        { icon: <SiLaravel className="text-[#FF2D20]" />, name: "Laravel" },
-        { icon: <SiMysql className="text-[#4479A1]" />, name: "MySQL" }
-      ],
-      mainIcon: <Ticket size={24} className="text-blue-500" />
     }
   ];
 
@@ -79,11 +137,11 @@ const ProjectSection = () => {
   };
 
   return (
-    <section id="projects" className="py-24 bg-[#0a0a0a] px-4 md:px-6 border-t border-white/5 relative">
+    <section id="projects" className="py-24 bg-[#0a0a0a] px-4 border-t border-white/5 relative">
       <div className="max-w-7xl mx-auto">
         
         {/* Header */}
-        <div className="mb-20">
+        <div className="mb-16">
           <span className="text-blue-500 font-mono tracking-[0.4em] text-[10px] uppercase block mb-4">/ 05. Digital Archive</span>
           <h2 className="text-5xl md:text-8xl font-black text-white tracking-tighter uppercase leading-[0.8]">
             Feat<span className="text-blue-500 italic">ured.</span>
@@ -95,121 +153,98 @@ const ProjectSection = () => {
           {projects.map((project) => (
             <motion.div
               key={project.id}
-              whileHover={{ y: -10 }}
+              whileHover={{ y: -8 }}
               onClick={() => setSelectedProject(project)}
-              className="group cursor-pointer relative bg-white/[0.02] border border-white/5 rounded-[2.5rem] overflow-hidden hover:border-blue-500/30 transition-all duration-500"
+              className="group cursor-pointer relative bg-white/[0.03] border border-white/5 rounded-[2rem] overflow-hidden"
             >
-              <div className="h-64 bg-gradient-to-br from-blue-600/10 to-transparent flex items-center justify-center relative overflow-hidden">
-                <img 
-                   src={project.images[0]} 
-                   alt="" 
-                   className="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-110 transition-transform duration-1000"
-                />
-                <div className="z-10 p-5 bg-black/60 rounded-3xl backdrop-blur-xl border border-white/10 group-hover:border-blue-500/50 transition-colors">
-                  {project.mainIcon}
-                </div>
-                <div className="absolute bottom-6 right-6 p-3 bg-blue-500 rounded-full text-black translate-y-20 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                  <ArrowUpRight size={20} strokeWidth={3} />
-                </div>
+              <div className="h-60 bg-black flex items-center justify-center relative overflow-hidden">
+                <img src={project.images[0]} alt="" className="absolute inset-0 w-full h-full object-cover object-top opacity-30 group-hover:scale-110 transition-transform duration-700" />
+                <div className="z-10 p-4 bg-black/60 rounded-2xl backdrop-blur-xl border border-white/10">{project.mainIcon}</div>
               </div>
-              
-              <div className="p-8">
-                <span className="text-blue-500 font-black text-[9px] uppercase tracking-[0.3em] mb-2 block">{project.category}</span>
-                <h3 className="text-2xl font-black text-white uppercase tracking-tight mb-6">{project.title}</h3>
-                
-                <div className="flex gap-4 pt-6 border-t border-white/5">
-                  {project.cardTech.map((tech, i) => (
-                    <div key={i} title={tech.name} className="text-xl text-gray-400 group-hover:text-white transition-colors">
-                      {tech.icon}
-                    </div>
-                  ))}
-                </div>
+              <div className="p-6">
+                <span className="text-blue-500 font-black text-[9px] uppercase tracking-widest mb-2 block">{project.category}</span>
+                <h3 className="text-xl font-bold text-white uppercase">{project.title}</h3>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Modal Popup */}
+        {/* Optimized Modal */}
         <AnimatePresence>
           {selectedProject && (
             <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[100] flex items-center justify-center p-0 md:p-6 lg:p-12 bg-black/98 backdrop-blur-2xl"
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[100] flex items-end md:items-center justify-center bg-black/95 backdrop-blur-md"
               onClick={closeModal}
             >
-              {/* TOP CENTER CLOSE BUTTON */}
-              <motion.button 
-                initial={{ y: -100, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: -100, opacity: 0 }}
-                onClick={closeModal}
-                className="fixed top-6 md:top-10 left-1/2 -translate-x-1/2 z-[150] flex flex-col items-center gap-2 group"
-              >
-                <div className="p-4 bg-blue-500 rounded-full text-black shadow-[0_0_30px_rgba(59,130,246,0.6)] group-hover:scale-110 transition-transform">
-                  <X size={24} strokeWidth={3} />
-                </div>
-                <span className="text-[10px] font-black text-white uppercase tracking-[0.5em] opacity-0 group-hover:opacity-100 transition-opacity duration-300">Close Archive</span>
-              </motion.button>
+              {/* Close Button Mobile (Floating) */}
+              <button onClick={closeModal} className="absolute top-6 right-6 z-[200] p-3 bg-white/10 rounded-full text-white md:hidden">
+                <X size={24} />
+              </button>
 
               <motion.div 
-                initial={{ scale: 0.9, y: 50 }}
-                animate={{ scale: 1, y: 0 }}
-                exit={{ scale: 0.9, y: 50 }}
-                className="bg-[#0a0a0a] border-t md:border border-white/10 w-full h-full md:h-auto md:max-h-[85vh] md:max-w-7xl md:rounded-[3.5rem] overflow-hidden grid grid-cols-1 lg:grid-cols-2 relative"
+                initial={{ y: "100%" }} animate={{ y: 0 }} exit={{ y: "100%" }}
+                transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                className="bg-[#0f0f0f] w-full h-[90vh] md:h-auto md:max-h-[85vh] md:max-w-6xl md:rounded-[2.5rem] rounded-t-[2.5rem] overflow-hidden grid grid-cols-1 md:grid-cols-2 relative"
                 onClick={(e) => e.stopPropagation()}
               >
-                {/* Image Section */}
-                <div className="relative h-[45vh] lg:h-full bg-[#050505] overflow-hidden group/gal">
-                  <motion.img 
-                    key={currentImgIndex}
-                    initial={{ opacity: 0, scale: 1.1 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    src={selectedProject.images[currentImgIndex]} 
-                    className="w-full h-full object-cover opacity-50"
-                  />
+                {/* Auto-Scroll Image Section */}
+                <div className="relative h-[40vh] md:h-[60vh] lg:h-full bg-black flex items-center justify-center overflow-hidden">
+                  <AnimatePresence mode="wait">
+                    <motion.img 
+                      key={currentImgIndex}
+                      initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}
+                      transition={{ duration: 0.6 }}
+                      src={selectedProject.images[currentImgIndex]} 
+                      className="w-full h-full object-contain p-4 md:p-8 relative z-10"
+                    />
+                  </AnimatePresence>
                   
-                  {/* Gallery Nav */}
-                  <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between px-6 opacity-0 group-hover/gal:opacity-100 transition-opacity duration-500">
-                    <button onClick={(e) => { e.stopPropagation(); setCurrentImgIndex(prev => prev === 0 ? selectedProject.images.length-1 : prev-1); }} className="p-4 bg-black/50 backdrop-blur-xl rounded-2xl text-white hover:bg-blue-500 transition-colors">
-                      <ChevronLeft size={24} />
-                    </button>
-                    <button onClick={(e) => { e.stopPropagation(); setCurrentImgIndex(prev => prev === selectedProject.images.length-1 ? 0 : prev+1); }} className="p-4 bg-black/50 backdrop-blur-xl rounded-2xl text-white hover:bg-blue-500 transition-colors">
-                      <ChevronRight size={24} />
-                    </button>
-                  </div>
+                  {/* Background Glow */}
+                  <div className="absolute inset-0 bg-blue-500/10 blur-[120px] rounded-full" />
 
-                  {/* Indicators */}
-                  <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-3">
+                  {/* Visual Progress Bars */}
+                  <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-1.5 z-20 px-10">
                     {selectedProject.images.map((_, i) => (
-                      <div key={i} className={`h-1.5 rounded-full transition-all duration-500 ${i === currentImgIndex ? 'w-10 bg-blue-500' : 'w-2 bg-white/20'}`} />
+                      <div key={i} className="h-1 flex-1 max-w-[40px] bg-white/10 rounded-full overflow-hidden">
+                        {i === currentImgIndex && (
+                          <motion.div 
+                            initial={{ width: 0 }} animate={{ width: "100%" }} 
+                            transition={{ duration: 5, ease: "linear" }}
+                            className="h-full bg-blue-500"
+                          />
+                        )}
+                      </div>
                     ))}
                   </div>
                 </div>
 
-                {/* Content Section */}
-                <div className="p-8 md:p-16 overflow-y-auto bg-gradient-to-br from-[#0a0a0a] to-black">
-                  <div className="space-y-12">
+                {/* Content Section (Scrollable on mobile) */}
+                <div className="p-8 md:p-12 overflow-y-auto custom-scrollbar">
+                  {/* Desktop Close Button */}
+                  <button onClick={closeModal} className="hidden md:flex absolute top-8 right-8 p-2 text-gray-500 hover:text-white transition-colors">
+                    <X size={32} />
+                  </button>
+
+                  <div className="space-y-8">
                     <div>
-                      <span className="text-blue-500 font-mono text-[10px] uppercase tracking-[0.5em] font-black">Architecture Brief</span>
-                      <h2 className="text-5xl md:text-7xl font-black text-white mt-6 uppercase tracking-tighter italic leading-[0.8]">
-                        {selectedProject.title.split(' ')[0]}<br/>
-                        <span className="text-blue-500">{selectedProject.title.split(' ').slice(1).join(' ')}</span>
+                      <span className="text-blue-500 font-mono text-[10px] uppercase tracking-[0.4em] font-black">Archive File</span>
+                      <h2 className="text-4xl md:text-6xl font-black text-white uppercase mt-4 leading-tight">
+                        {selectedProject.title}
                       </h2>
                     </div>
 
-                    <p className="text-gray-400 text-lg leading-relaxed font-medium italic border-l-2 border-blue-500/30 pl-6">
-                      "{selectedProject.description}"
+                    <p className="text-gray-400 text-base md:text-lg leading-relaxed border-l-2 border-blue-500/40 pl-5 italic">
+                      {selectedProject.description}
                     </p>
 
-                    <div className="pt-10 border-t border-white/5">
-                      <h4 className="text-gray-500 font-mono text-[10px] uppercase tracking-widest mb-8 text-center md:text-left">Technical Integration</h4>
-                      <div className="flex flex-wrap justify-center md:justify-start gap-10">
+                    <div className="pt-6 border-t border-white/5">
+                      <h4 className="text-gray-500 font-mono text-[9px] uppercase tracking-widest mb-6">Stack Integration</h4>
+                      <div className="grid grid-cols-3 gap-6">
                         {selectedProject.cardTech.map((t, i) => (
-                          <div key={i} className="flex flex-col items-center gap-3">
-                            <span className="text-4xl text-white">{t.icon}</span>
-                            <span className="text-[9px] font-black text-gray-500 uppercase tracking-tighter">{t.name}</span>
+                          <div key={i} className="flex flex-col items-center p-4 bg-white/[0.02] rounded-2xl border border-white/5">
+                            <span className="text-3xl mb-2">{t.icon}</span>
+                            <span className="text-[8px] font-bold text-gray-400 uppercase text-center">{t.name}</span>
                           </div>
                         ))}
                       </div>
