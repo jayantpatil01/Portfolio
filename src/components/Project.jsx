@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ShoppingBag, Ticket, Layout, ChevronRight, ChevronLeft, Zap } from 'lucide-react';
+import { X, ShoppingBag, Ticket, Layout, ChevronRight, ChevronLeft, Zap, ArrowUpRight } from 'lucide-react';
 import { 
   SiReact, SiNodedotjs, SiMongodb, SiLaravel, 
   SiPhp, SiTailwindcss, SiMysql, SiExpress 
@@ -10,13 +10,22 @@ const ProjectSection = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
 
+  // Lock scroll when modal is open
+  useEffect(() => {
+    if (selectedProject) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [selectedProject]);
+
   const projects = [
     {
       id: 1,
       title: "Enterprise ERP System",
-      category: "Internal Management",
+      category: "Management",
       description: "A comprehensive solution for inventory tracking, financial reporting, and employee management. Architected to handle complex relational data with high security and real-time updates.",
-      stack: "React, Node.js, MongoDB, Express",
+      stack: "MERN Stack / Internal Operations",
       images: [
         "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&q=80&w=1000", 
         "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000"
@@ -26,14 +35,14 @@ const ProjectSection = () => {
         { icon: <SiNodedotjs className="text-[#339933]" />, name: "Node" },
         { icon: <SiMongodb className="text-[#47A248]" />, name: "MongoDB" }
       ],
-      mainIcon: <Layout className="text-blue-500" />
+      mainIcon: <Layout size={24} className="text-blue-500" />
     },
     {
       id: 2,
       title: "Modern E-Commerce",
       category: "Retail Tech",
       description: "A full-scale marketplace featuring dynamic product filtering, an optimized checkout flow, and a custom-built admin dashboard for inventory management.",
-      stack: "MERN Stack, Tailwind CSS, Redux",
+      stack: "MERN Stack / Redux / Tailwind",
       images: [
         "https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&q=80&w=1000",
         "https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&q=80&w=1000"
@@ -43,14 +52,14 @@ const ProjectSection = () => {
         { icon: <SiExpress className="text-white" />, name: "Express" },
         { icon: <SiTailwindcss className="text-[#06B6D4]" />, name: "Tailwind" }
       ],
-      mainIcon: <ShoppingBag className="text-blue-500" />
+      mainIcon: <ShoppingBag size={24} className="text-blue-500" />
     },
     {
       id: 3,
       title: "Lottery Gaming Engine",
-      category: "Gaming & Logic",
+      category: "Gaming Logic",
       description: "High-performance lottery ecosystem featuring secure transaction logic, automated prize distribution algorithms, and real-time result broadcasting.",
-      stack: "PHP, Laravel, MySQL, JavaScript",
+      stack: "PHP 8.x / Laravel / MySQL",
       images: [
         "https://images.unsplash.com/photo-1518623489648-a173ef7824f3?auto=format&fit=crop&q=80&w=1000",
         "https://images.unsplash.com/photo-1553481187-be93c21490a9?auto=format&fit=crop&q=80&w=1000"
@@ -60,7 +69,7 @@ const ProjectSection = () => {
         { icon: <SiLaravel className="text-[#FF2D20]" />, name: "Laravel" },
         { icon: <SiMysql className="text-[#4479A1]" />, name: "MySQL" }
       ],
-      mainIcon: <Ticket className="text-blue-500" />
+      mainIcon: <Ticket size={24} className="text-blue-500" />
     }
   ];
 
@@ -69,154 +78,141 @@ const ProjectSection = () => {
     setCurrentImgIndex(0);
   };
 
-  const nextImage = (e) => {
-    e.stopPropagation();
-    setCurrentImgIndex((prev) => (prev === selectedProject.images.length - 1 ? 0 : prev + 1));
-  };
-
-  const prevImage = (e) => {
-    e.stopPropagation();
-    setCurrentImgIndex((prev) => (prev === 0 ? selectedProject.images.length - 1 : prev - 1));
-  };
-
   return (
-    <section id="projects" className="py-24 bg-[#0a0a0a] px-6 border-t border-white/5">
-      <div className="max-w-6xl mx-auto">
+    <section id="projects" className="py-24 bg-[#0a0a0a] px-4 md:px-6 border-t border-white/5 relative">
+      <div className="max-w-7xl mx-auto">
         
-        {/* Header Section */}
+        {/* Header */}
         <div className="mb-20">
-          <span className="text-blue-500 font-mono tracking-widest text-xs uppercase">/ 05. Portfolio</span>
-          <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter mt-4 uppercase">
+          <span className="text-blue-500 font-mono tracking-[0.4em] text-[10px] uppercase block mb-4">/ 05. Digital Archive</span>
+          <h2 className="text-5xl md:text-8xl font-black text-white tracking-tighter uppercase leading-[0.8]">
             Feat<span className="text-blue-500 italic">ured.</span>
           </h2>
         </div>
 
         {/* Project Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project) => (
             <motion.div
               key={project.id}
               whileHover={{ y: -10 }}
               onClick={() => setSelectedProject(project)}
-              className="cursor-pointer group relative bg-white/[0.02] border border-white/5 rounded-[2.5rem] overflow-hidden hover:border-blue-500/30 transition-all duration-500"
+              className="group cursor-pointer relative bg-white/[0.02] border border-white/5 rounded-[2.5rem] overflow-hidden hover:border-blue-500/30 transition-all duration-500"
             >
-              <div className="h-48 bg-gradient-to-br from-blue-600/5 to-transparent flex items-center justify-center relative overflow-hidden">
-                 <div className="z-10 p-5 bg-black/40 rounded-3xl backdrop-blur-xl border border-white/5 group-hover:scale-110 transition-transform duration-500">
-                  {React.cloneElement(project.mainIcon, { size: 32 })}
+              <div className="h-64 bg-gradient-to-br from-blue-600/10 to-transparent flex items-center justify-center relative overflow-hidden">
+                <img 
+                   src={project.images[0]} 
+                   alt="" 
+                   className="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-110 transition-transform duration-1000"
+                />
+                <div className="z-10 p-5 bg-black/60 rounded-3xl backdrop-blur-xl border border-white/10 group-hover:border-blue-500/50 transition-colors">
+                  {project.mainIcon}
+                </div>
+                <div className="absolute bottom-6 right-6 p-3 bg-blue-500 rounded-full text-black translate-y-20 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                  <ArrowUpRight size={20} strokeWidth={3} />
                 </div>
               </div>
               
               <div className="p-8">
-                <span className="text-blue-500 font-bold text-[10px] uppercase tracking-widest">{project.category}</span>
-                <h3 className="text-2xl font-black text-white mt-1 uppercase leading-tight mb-6">{project.title}</h3>
+                <span className="text-blue-500 font-black text-[9px] uppercase tracking-[0.3em] mb-2 block">{project.category}</span>
+                <h3 className="text-2xl font-black text-white uppercase tracking-tight mb-6">{project.title}</h3>
                 
-                {/* Tech Icons on Card Layout */}
-                <div className="flex gap-4 mb-8 border-t border-white/5 pt-6">
+                <div className="flex gap-4 pt-6 border-t border-white/5">
                   {project.cardTech.map((tech, i) => (
-                    <div key={i} title={tech.name} className="text-xl group-hover:scale-125 transition-transform duration-300">
+                    <div key={i} title={tech.name} className="text-xl text-gray-400 group-hover:text-white transition-colors">
                       {tech.icon}
                     </div>
                   ))}
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center text-gray-500 font-bold text-[10px] tracking-widest group-hover:text-blue-500 transition-colors">
-                    EXPLORE CASE STUDY <ChevronRight size={14} />
-                  </div>
-                  <Zap size={14} className="text-blue-500/20 group-hover:text-blue-500 transition-colors animate-pulse" />
                 </div>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Interactive Modal Popup */}
+        {/* Modal Popup */}
         <AnimatePresence>
           {selectedProject && (
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-10 bg-black/95 backdrop-blur-xl"
+              className="fixed inset-0 z-[100] flex items-center justify-center p-0 md:p-6 lg:p-12 bg-black/98 backdrop-blur-2xl"
               onClick={closeModal}
             >
+              {/* TOP CENTER CLOSE BUTTON */}
+              <motion.button 
+                initial={{ y: -100, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -100, opacity: 0 }}
+                onClick={closeModal}
+                className="fixed top-6 md:top-10 left-1/2 -translate-x-1/2 z-[150] flex flex-col items-center gap-2 group"
+              >
+                <div className="p-4 bg-blue-500 rounded-full text-black shadow-[0_0_30px_rgba(59,130,246,0.6)] group-hover:scale-110 transition-transform">
+                  <X size={24} strokeWidth={3} />
+                </div>
+                <span className="text-[10px] font-black text-white uppercase tracking-[0.5em] opacity-0 group-hover:opacity-100 transition-opacity duration-300">Close Archive</span>
+              </motion.button>
+
               <motion.div 
-                initial={{ scale: 0.9, y: 20 }}
+                initial={{ scale: 0.9, y: 50 }}
                 animate={{ scale: 1, y: 0 }}
-                exit={{ scale: 0.9, y: 20 }}
-                className="bg-[#0f0f0f] border border-white/10 w-full max-w-6xl max-h-[90vh] rounded-[3rem] overflow-hidden grid grid-cols-1 lg:grid-cols-2 shadow-2xl relative"
+                exit={{ scale: 0.9, y: 50 }}
+                className="bg-[#0a0a0a] border-t md:border border-white/10 w-full h-full md:h-auto md:max-h-[85vh] md:max-w-7xl md:rounded-[3.5rem] overflow-hidden grid grid-cols-1 lg:grid-cols-2 relative"
                 onClick={(e) => e.stopPropagation()}
               >
-                {/* Close Button */}
-                <button 
-                  onClick={closeModal}
-                  className="absolute top-6 right-6 p-2 bg-white/5 rounded-full text-gray-400 hover:text-white transition-colors z-[110]"
-                >
-                  <X size={20} />
-                </button>
-
-                {/* Left: Image Gallery */}
-                <div className="relative bg-black h-[300px] lg:h-full flex items-center justify-center overflow-hidden border-b lg:border-b-0 lg:border-r border-white/5 group/gallery">
+                {/* Image Section */}
+                <div className="relative h-[45vh] lg:h-full bg-[#050505] overflow-hidden group/gal">
                   <motion.img 
                     key={currentImgIndex}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
+                    initial={{ opacity: 0, scale: 1.1 }}
+                    animate={{ opacity: 1, scale: 1 }}
                     src={selectedProject.images[currentImgIndex]} 
-                    alt="Project Detail"
-                    className="w-full h-full object-cover opacity-60 group-hover/gallery:opacity-80 transition-opacity duration-700"
+                    className="w-full h-full object-cover opacity-50"
                   />
                   
-                  {/* Gallery Navigation Arrows */}
-                  {selectedProject.images.length > 1 && (
-                    <>
-                      <button onClick={prevImage} className="absolute left-4 p-3 bg-black/50 backdrop-blur-md rounded-full text-white hover:bg-blue-500 transition-all transform -translate-x-10 group-hover/gallery:translate-x-0">
-                        <ChevronLeft size={20} />
-                      </button>
-                      <button onClick={nextImage} className="absolute right-4 p-3 bg-black/50 backdrop-blur-md rounded-full text-white hover:bg-blue-500 transition-all transform translate-x-10 group-hover/gallery:translate-x-0">
-                        <ChevronRight size={20} />
-                      </button>
-                    </>
-                  )}
+                  {/* Gallery Nav */}
+                  <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between px-6 opacity-0 group-hover/gal:opacity-100 transition-opacity duration-500">
+                    <button onClick={(e) => { e.stopPropagation(); setCurrentImgIndex(prev => prev === 0 ? selectedProject.images.length-1 : prev-1); }} className="p-4 bg-black/50 backdrop-blur-xl rounded-2xl text-white hover:bg-blue-500 transition-colors">
+                      <ChevronLeft size={24} />
+                    </button>
+                    <button onClick={(e) => { e.stopPropagation(); setCurrentImgIndex(prev => prev === selectedProject.images.length-1 ? 0 : prev+1); }} className="p-4 bg-black/50 backdrop-blur-xl rounded-2xl text-white hover:bg-blue-500 transition-colors">
+                      <ChevronRight size={24} />
+                    </button>
+                  </div>
 
-                  {/* Image Progress Indicator */}
-                  <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
+                  {/* Indicators */}
+                  <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-3">
                     {selectedProject.images.map((_, i) => (
-                      <div 
-                        key={i} 
-                        className={`h-1 rounded-full transition-all duration-300 ${i === currentImgIndex ? 'w-8 bg-blue-500' : 'w-2 bg-white/20'}`} 
-                      />
+                      <div key={i} className={`h-1.5 rounded-full transition-all duration-500 ${i === currentImgIndex ? 'w-10 bg-blue-500' : 'w-2 bg-white/20'}`} />
                     ))}
                   </div>
                 </div>
 
-                {/* Right: Project Details */}
-                <div className="p-8 md:p-16 overflow-y-auto">
-                  <span className="text-blue-500 font-mono text-xs uppercase tracking-[0.4em] font-bold">Deep Dive Analysis</span>
-                  <h2 className="text-4xl md:text-5xl font-black text-white mt-4 mb-8 uppercase tracking-tighter italic leading-[0.9]">
-                    {selectedProject.title}
-                  </h2>
-                  
-                  <div className="space-y-10">
+                {/* Content Section */}
+                <div className="p-8 md:p-16 overflow-y-auto bg-gradient-to-br from-[#0a0a0a] to-black">
+                  <div className="space-y-12">
                     <div>
-                      <h4 className="text-white font-bold mb-3 uppercase text-[10px] tracking-widest border-b border-white/10 pb-2 inline-block">The Problem / Solution</h4>
-                      <p className="text-gray-400 leading-relaxed text-base">
-                        {selectedProject.description}
-                      </p>
+                      <span className="text-blue-500 font-mono text-[10px] uppercase tracking-[0.5em] font-black">Architecture Brief</span>
+                      <h2 className="text-5xl md:text-7xl font-black text-white mt-6 uppercase tracking-tighter italic leading-[0.8]">
+                        {selectedProject.title.split(' ')[0]}<br/>
+                        <span className="text-blue-500">{selectedProject.title.split(' ').slice(1).join(' ')}</span>
+                      </h2>
                     </div>
 
-                    <div>
-                      <h4 className="text-white font-bold mb-4 uppercase text-[10px] tracking-widest border-b border-white/10 pb-2 inline-block">Core Stack Integration</h4>
-                      <div className="flex gap-6 items-center">
+                    <p className="text-gray-400 text-lg leading-relaxed font-medium italic border-l-2 border-blue-500/30 pl-6">
+                      "{selectedProject.description}"
+                    </p>
+
+                    <div className="pt-10 border-t border-white/5">
+                      <h4 className="text-gray-500 font-mono text-[10px] uppercase tracking-widest mb-8 text-center md:text-left">Technical Integration</h4>
+                      <div className="flex flex-wrap justify-center md:justify-start gap-10">
                         {selectedProject.cardTech.map((t, i) => (
-                          <div key={i} className="flex flex-col items-center gap-2">
-                            <span className="text-3xl">{t.icon}</span>
-                            <span className="text-[8px] font-black text-gray-600 tracking-tighter">{t.name}</span>
+                          <div key={i} className="flex flex-col items-center gap-3">
+                            <span className="text-4xl text-white">{t.icon}</span>
+                            <span className="text-[9px] font-black text-gray-500 uppercase tracking-tighter">{t.name}</span>
                           </div>
                         ))}
                       </div>
-                      <p className="mt-6 text-gray-500 font-mono text-xs italic">
-                        Technical Architecture: {selectedProject.stack}
-                      </p>
                     </div>
                   </div>
                 </div>

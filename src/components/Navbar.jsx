@@ -5,6 +5,11 @@ import { Home, Code2, User, Mail, Menu, X, Briefcase } from 'lucide-react';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  // WhatsApp Configuration
+  const whatsappNumber = "917219709493";
+  const message = "Hi Jayant, I'd like to talk about a potential project!";
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
   const navLinks = [
     { name: "Home", href: "#home", icon: <Home size={16} /> },
     { name: "Projects", href: "#projects", icon: <Code2 size={16} /> },
@@ -50,14 +55,18 @@ const Navbar = () => {
 
         {/* Slim Action Section */}
         <div className="flex items-center gap-3">
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="hidden sm:flex items-center gap-2 bg-white text-black px-4 py-1.5 rounded-lg font-bold text-[12px] uppercase tracking-wider transition-transform"
+          {/* Desktop Hire Button */}
+          <motion.a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="hidden sm:flex items-center gap-2 bg-white text-black px-4 py-1.5 rounded-lg font-bold text-[12px] uppercase tracking-wider transition-all hover:bg-blue-500 hover:text-white"
           >
             <Briefcase size={14} />
             Hire
-          </motion.button>
+          </motion.a>
 
           <button 
             onClick={() => setIsOpen(!isOpen)}
@@ -97,10 +106,18 @@ const Navbar = () => {
                   <span className="font-medium text-sm">{link.name}</span>
                 </a>
               ))}
-              <button className="mt-2 flex items-center justify-center gap-2 bg-white text-black p-3 rounded-xl font-bold text-sm">
+              
+              {/* Mobile Hire Button */}
+              <a 
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsOpen(false)}
+                className="mt-2 flex items-center justify-center gap-2 bg-white text-black p-3 rounded-xl font-bold text-sm hover:bg-blue-500 hover:text-white transition-colors"
+              >
                 <Briefcase size={16} />
                 Hire Me
-              </button>
+              </a>
             </motion.div>
           </>
         )}

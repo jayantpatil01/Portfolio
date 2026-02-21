@@ -10,7 +10,6 @@ import ProfessionalJourney from './components/ProfessionalJourney';
 import ProjectsSection from './components/Project';
 import Footer from './components/Footer';
 
-
 function App() {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -31,19 +30,34 @@ function App() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
           >
-            {/* Navbar appears fixed at the top */}
             <Navbar />
 
             <main>
-              {/* HeroSection now contains your primary greeting and CTA */}
-              <HeroSection />
-              <AboutSection />
-              <SkillsSection />
+              {/* Added IDs to sections for Navbar navigation */}
+              <div id="home">
+                <HeroSection />
+              </div>
+
+              <div id="about">
+                <AboutSection />
+              </div>
+
+              <div id="skills">
+                <SkillsSection />
+              </div>
+
               <EducationSection />
               <ProfessionalJourney />
-              <ProjectsSection />
+
+              <div id="projects">
+                <ProjectsSection />
+              </div>
             </main>
-            <Footer />
+
+            {/* Added ID to Footer for "Contact" navigation */}
+            <div id="contact">
+              <Footer />
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
