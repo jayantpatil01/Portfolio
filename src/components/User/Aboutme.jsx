@@ -5,7 +5,7 @@ import {
   SiMongodb, SiExpress, SiReact, SiNodedotjs, 
   SiNextdotjs, SiLaravel, SiTailwindcss, SiOpenai 
 } from 'react-icons/si';
-import Dp from '../assets/Dp.jpg';
+import Dp from '../../assets/Dp.jpg';
 
 const AboutSection = () => {
   const techStack = [
