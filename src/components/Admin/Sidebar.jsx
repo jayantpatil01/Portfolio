@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { 
   LayoutDashboard, Briefcase, MessageSquare, 
-  Settings, LogOut, Menu, X, ChevronRight 
+  Settings, LogOut, Menu, X, ChevronRight, FileCode 
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -14,6 +14,7 @@ const Sidebar = () => {
   const menuItems = [
     { icon: <LayoutDashboard size={22} />, label: 'Dashboard', path: '/admin/home' },
     { icon: <Briefcase size={22} />, label: 'Projects', path: '/admin/projects' },
+    { icon: <FileCode size={22} />, label: 'Resume', path: '/admin/resume' }, // Added Resume
     { icon: <MessageSquare size={22} />, label: 'Messages', path: '/admin/messages' },
     { icon: <Settings size={22} />, label: 'Settings', path: '/admin/settings' },
   ];
@@ -25,14 +26,14 @@ const Sidebar = () => {
 
   const NavContent = () => (
     <div className="flex flex-col h-full py-6">
-      {/* Brand Logo */}
+      {/* Brand Logo - Personalized JP */}
       <div className="px-6 mb-10 flex items-center gap-3">
         <div className="h-10 w-10 bg-blue-600 rounded-xl flex items-center justify-center shadow-[0_0_20px_rgba(37,99,235,0.3)]">
-          <span className="text-white font-black text-xl italic">G</span>
+          <span className="text-white font-black text-xl italic">JP</span>
         </div>
         <div className="flex flex-col">
-          <span className="text-white font-bold tracking-tight leading-none">Admin</span>
-          <span className="text-gray-500 text-[10px] uppercase tracking-widest font-black mt-1">Portfolio v2</span>
+          <span className="text-white font-bold tracking-tight leading-none">Jayant</span>
+          <span className="text-gray-500 text-[10px] uppercase tracking-widest font-black mt-1">Dev Console</span>
         </div>
       </div>
 
@@ -74,20 +75,20 @@ const Sidebar = () => {
 
   return (
     <>
-      {/* MOBILE HEADER (Top Bar) */}
+      {/* MOBILE HEADER */}
       <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-[#080808]/80 backdrop-blur-md border-b border-white/5 z-50 px-6 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="h-8 w-8 bg-blue-600 rounded-lg flex items-center justify-center">
-            <span className="text-white font-black text-xs">G</span>
+            <span className="text-white font-black text-xs">JP</span>
           </div>
-          <span className="text-white font-bold text-sm tracking-tight">Admin</span>
+          <span className="text-white font-bold text-sm tracking-tight tracking-widest uppercase text-[10px]">Console</span>
         </div>
         <button onClick={() => setIsOpen(true)} className="text-white p-2 bg-white/5 rounded-lg">
           <Menu size={20} />
         </button>
       </div>
 
-      {/* MOBILE DRAWER OVERLAY */}
+      {/* MOBILE DRAWER */}
       <AnimatePresence>
         {isOpen && (
           <>
@@ -110,7 +111,7 @@ const Sidebar = () => {
         )}
       </AnimatePresence>
 
-      {/* DESKTOP SIDEBAR (Static) */}
+      {/* DESKTOP SIDEBAR */}
       <aside className="hidden lg:flex w-72 h-screen bg-[#080808] border-r border-white/5 sticky top-0">
         <NavContent />
       </aside>

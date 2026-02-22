@@ -6,6 +6,7 @@ import Home from './pages/User/Home';
 // Admin Pages
 import AdminLogin from './pages/Admin/Login';
 import AdminHome from './pages/Admin/Home';
+import Resume from './pages/Admin/Resume';
 
 // Admin Layout
 import AdminLayout from './components/Admin/AdminLayout';
@@ -23,9 +24,8 @@ function App() {
         {/* Admin Protected Routes - Wrap these in AdminLayout */}
         <Route path="/admin" element={<AdminLayout />}>
           <Route path="home" element={<AdminHome />} />
-          {/* You can add more admin routes here later, like:
-              <Route path="projects" element={<AdminProjects />} /> 
-          */}
+           <Route path='resume' element={<Resume />} /> 
+
         </Route>
       </Routes>
     </BrowserRouter>  
