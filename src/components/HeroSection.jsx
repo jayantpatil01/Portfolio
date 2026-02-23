@@ -120,7 +120,7 @@ const HeroSection = () => {
           </button>
           
           <a 
-            href="https://drive.google.com/file/d/1KCaVqCLOw5mkQ5xjLLbfjtT35KSLjAD6/view?usp=sharing" 
+            href="https://drive.google.com/file/d/1PpC0ktfBbiKq1HDykBiF8dNxYLWxxBXm/view?usp=sharing" 
             target="_blank" 
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-8 py-4 bg-white/5 border border-white/10 text-white font-bold rounded-xl text-sm hover:bg-white/10 hover:border-blue-500/50 transition-all shadow-lg"

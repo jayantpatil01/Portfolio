@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import SplashScreen from '../../components/User/SplashScreen.jsx';
-import Navbar from '../../components/User/Navbar';
-import HeroSection from '../../components/User/HeroSection';
-import AboutSection from '../../components/User/Aboutme';
-import SkillsSection from '../../components/User/Skills';  
-import EducationSection from '../../components/User/Education';
-import ProfessionalJourney from '../../components/User/ProfessionalJourney';
-import ProjectsSection from '../../components/User/Project';
-import Footer from '../../components/User/Footer';
+import SplashScreen from '../components/SplashScreen';
+import Navbar from '../components/Navbar';
+import HeroSection from '../components/HeroSection';
+import AboutSection from '../components/Aboutme';
+import SkillsSection from '../components/Skills';  
+import EducationSection from '../components/Education';
+import ProfessionalJourney from '../components/ProfessionalJourney';
+import ProjectsSection from '../components/Project';
+import Footer from '../components/Footer';
 
 
 
